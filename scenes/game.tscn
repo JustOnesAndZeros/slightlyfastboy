@@ -1,0 +1,242 @@
+[gd_scene load_steps=40 format=3 uid="uid://2ttspvvotep5"]
+
+[ext_resource type="PackedScene" uid="uid://b2qdx82knwogi" path="res://scenes/fast_boy.tscn" id="1_5kiuu"]
+[ext_resource type="Script" uid="uid://bh1y2g628vx43" path="res://scripts/girl_spawner.gd" id="1_dbls1"]
+[ext_resource type="Script" uid="uid://pxmswq77b00t" path="res://scripts/james_spawner.gd" id="2_lbhrr"]
+[ext_resource type="Script" uid="uid://djio6logu5yi5" path="res://scripts/ad_spawner.gd" id="3_ca42v"]
+[ext_resource type="Script" uid="uid://cemh5gip2ebbs" path="res://scripts/evil_rectangle.gd" id="4_lbhrr"]
+[ext_resource type="Script" uid="uid://dywi7egysih1v" path="res://scripts/overlay.gd" id="4_trtic"]
+[ext_resource type="Shader" uid="uid://b7kcear8h4bgl" path="res://scripts/speedlines.gdshader" id="5_kvuet"]
+[ext_resource type="AudioStream" uid="uid://c1tjhu02jggug" path="res://audio/fever_stadium.ogg" id="6_trtic"]
+[ext_resource type="Script" uid="uid://bnmtfnuij2ftc" path="res://scripts/sound.gd" id="7_ir15t"]
+[ext_resource type="AudioStream" uid="uid://hjo6m3p2kjhq" path="res://audio/fever_stadium_reversed.ogg" id="8_ca42v"]
+[ext_resource type="FontFile" uid="uid://ewnao6vow1r0" path="res://fonts/comic.ttf" id="9_rysoc"]
+[ext_resource type="Script" uid="uid://0yt6pfrf006o" path="res://scripts/bouncing_label.gd" id="10_ir15t"]
+[ext_resource type="AudioStream" uid="uid://ypismavanh3c" path="res://audio/fever_stadium_evil.ogg" id="10_pl11u"]
+[ext_resource type="Script" uid="uid://da4x0ylo222gr" path="res://scripts/speedrun_timer.gd" id="10_ssvqc"]
+[ext_resource type="Script" uid="uid://bdoifxaslusim" path="res://scripts/murder_counter.gd" id="11_264po"]
+[ext_resource type="AudioStream" uid="uid://v44xb3hhd8kd" path="res://audio/fever_stadium_evil_reversed.ogg" id="11_bhx41"]
+[ext_resource type="AudioStream" uid="uid://dmdbrinmiy772" path="res://audio/title_slow.ogg" id="12_1kice"]
+[ext_resource type="AudioStream" uid="uid://cneelmcydfd4l" path="res://audio/title_slow_reversed.ogg" id="13_5newe"]
+[ext_resource type="Texture2D" uid="uid://dtqh5nxj0nvi0" path="res://sprites/john_face.png" id="17_rysoc"]
+[ext_resource type="AudioStream" uid="uid://4auomlrr7n2p" path="res://audio/john_groan_0.ogg" id="18_bt5mj"]
+[ext_resource type="AudioStream" uid="uid://ch11uohxlroca" path="res://audio/john_groan_0_reversed.ogg" id="19_e1j6l"]
+[ext_resource type="AudioStream" uid="uid://c4gnppglt1edj" path="res://audio/john_groan_1.ogg" id="20_pl11u"]
+[ext_resource type="AudioStream" uid="uid://bb8x8h40hlitf" path="res://audio/john_groan_1_reversed.ogg" id="21_bhx41"]
+[ext_resource type="AudioStream" uid="uid://bpkjungw2ktkl" path="res://audio/john_groan_2.ogg" id="22_qnb83"]
+[ext_resource type="AudioStream" uid="uid://cr37ot600auil" path="res://audio/john_groan_2_reversed.ogg" id="23_sww3w"]
+
+[sub_resource type="Curve" id="Curve_37s47"]
+_data = [Vector2(0.3, 0), 0.0, 0.0, 0, 0, Vector2(0.75, 1), 1.66667, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+metadata/_snap_count = 20
+
+[sub_resource type="CurveTexture" id="CurveTexture_lbhrr"]
+curve = SubResource("Curve_37s47")
+
+[sub_resource type="Curve" id="Curve_bt5mj"]
+_data = [Vector2(0.204188, 1), 0.0, 0.0, 0, 0, Vector2(0.502618, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_p57ef"]
+curve = SubResource("Curve_bt5mj")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_e1j6l"]
+noise_type = 0
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gee14"]
+noise = SubResource("FastNoiseLite_e1j6l")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pl11u"]
+shader = ExtResource("5_kvuet")
+shader_parameter/noise = SubResource("NoiseTexture2D_gee14")
+shader_parameter/alpha = 1.0
+shader_parameter/falloff = SubResource("CurveTexture_lbhrr")
+shader_parameter/lineFalloff = SubResource("CurveTexture_p57ef")
+shader_parameter/speed = 10.0
+
+[sub_resource type="Gradient" id="Gradient_0tnpc"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bhx41"]
+gradient = SubResource("Gradient_0tnpc")
+
+[sub_resource type="LabelSettings" id="LabelSettings_qnb83"]
+line_spacing = 0.0
+font = ExtResource("9_rysoc")
+font_size = 128
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lbhrr"]
+blend_mode = 3
+
+[sub_resource type="Animation" id="Animation_264po"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EvilRectangle/JohnFace:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ssvqc"]
+resource_name = "jumpscare"
+length = 0.75
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EvilRectangle/JohnFace:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1kice"]
+_data = {
+&"RESET": SubResource("Animation_264po"),
+&"jumpscare": SubResource("Animation_ssvqc")
+}
+
+[node name="Game" type="Node2D"]
+
+[node name="GirlSpawner" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+script = ExtResource("1_dbls1")
+
+[node name="JamesSpawner" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+script = ExtResource("2_lbhrr")
+
+[node name="AdSpawner" type="Timer" parent="."]
+wait_time = 10.0
+script = ExtResource("3_ca42v")
+
+[node name="FastBoy" parent="." instance=ExtResource("1_5kiuu")]
+
+[node name="Overlay" type="Control" parent="."]
+z_index = 99
+layout_mode = 3
+anchors_preset = 0
+offset_left = -120.0
+offset_top = -67.5
+offset_right = 1800.0
+offset_bottom = 1012.5
+scale = Vector2(0.125, 0.125)
+script = ExtResource("4_trtic")
+
+[node name="Speedlines" type="TextureRect" parent="Overlay"]
+visible = false
+z_index = -1
+material = SubResource("ShaderMaterial_pl11u")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_bhx41")
+
+[node name="FastMusic" type="AudioStreamPlayer" parent="Overlay/Speedlines"]
+stream = ExtResource("6_trtic")
+script = ExtResource("7_ir15t")
+sfx = ExtResource("6_trtic")
+sfx_reverse = ExtResource("8_ca42v")
+
+[node name="EvilFastMusic" type="AudioStreamPlayer" parent="Overlay/Speedlines"]
+stream = ExtResource("10_pl11u")
+volume_db = -6.0
+script = ExtResource("7_ir15t")
+sfx = ExtResource("10_pl11u")
+sfx_reverse = ExtResource("11_bhx41")
+
+[node name="SpeedrunTimer" type="Control" parent="Overlay"]
+anchors_preset = 0
+script = ExtResource("10_ir15t")
+
+[node name="Label" type="Label" parent="Overlay/SpeedrunTimer"]
+clip_contents = true
+layout_mode = 0
+offset_right = 545.0
+offset_bottom = 180.0
+text = "00:00:00"
+label_settings = SubResource("LabelSettings_qnb83")
+script = ExtResource("10_ssvqc")
+
+[node name="MurderCounter" type="Control" parent="Overlay"]
+anchors_preset = 0
+script = ExtResource("10_ir15t")
+
+[node name="Label" type="Label" parent="Overlay/MurderCounter"]
+layout_mode = 1
+offset_right = 602.0
+offset_bottom = 180.0
+text = "Murder: 0"
+label_settings = SubResource("LabelSettings_qnb83")
+script = ExtResource("11_264po")
+
+[node name="SuperEvilNotFunTimes" type="AudioStreamPlayer" parent="Overlay/MurderCounter/Label"]
+stream = ExtResource("12_1kice")
+pitch_scale = 0.5
+script = ExtResource("7_ir15t")
+sfx = ExtResource("12_1kice")
+sfx_reverse = ExtResource("13_5newe")
+
+[node name="EvilRectangle" type="ColorRect" parent="."]
+z_index = 100
+material = SubResource("CanvasItemMaterial_lbhrr")
+offset_left = -120.0
+offset_top = -67.5
+offset_right = 1800.0
+offset_bottom = 1012.5
+scale = Vector2(0.125, 0.125)
+script = ExtResource("4_lbhrr")
+
+[node name="JohnFace" type="Sprite2D" parent="EvilRectangle"]
+modulate = Color(1, 1, 1, 0)
+z_index = -1
+position = Vector2(960, 732)
+scale = Vector2(8, 8)
+texture = ExtResource("17_rysoc")
+
+[node name="Groan0" type="AudioStreamPlayer" parent="EvilRectangle/JohnFace"]
+stream = ExtResource("18_bt5mj")
+script = ExtResource("7_ir15t")
+sfx = ExtResource("18_bt5mj")
+sfx_reverse = ExtResource("19_e1j6l")
+
+[node name="Groan1" type="AudioStreamPlayer" parent="EvilRectangle/JohnFace"]
+stream = ExtResource("20_pl11u")
+script = ExtResource("7_ir15t")
+sfx = ExtResource("20_pl11u")
+sfx_reverse = ExtResource("21_bhx41")
+
+[node name="Groan2" type="AudioStreamPlayer" parent="EvilRectangle/JohnFace"]
+stream = ExtResource("22_qnb83")
+script = ExtResource("7_ir15t")
+sfx = ExtResource("22_qnb83")
+sfx_reverse = ExtResource("23_sww3w")
+
+[node name="Jumpscare" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1kice")
+}
+
+[connection signal="timeout" from="GirlSpawner" to="GirlSpawner" method="_on_timeout"]
+[connection signal="timeout" from="JamesSpawner" to="JamesSpawner" method="_on_timeout"]
+[connection signal="timeout" from="AdSpawner" to="AdSpawner" method="_on_timeout"]

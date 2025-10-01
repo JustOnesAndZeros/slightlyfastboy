@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxtguqkhf4vj8"]
+
+[ext_resource type="Script" uid="uid://utran0taxoxa" path="res://scripts/file_prompt.gd" id="1_ebmjx"]
+
+[node name="FilePrompt" type="Node"]
+script = ExtResource("1_ebmjx")
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+initial_position = 2
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+use_native_dialog = true
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+title = ""
+initial_position = 2
+size = Vector2i(541, 106)
+unresizable = true
+force_native = true
+dialog_text = "Please give me a file ;)
+(You may not get it back so please don't choose anything important)"
+
+[connection signal="canceled" from="FileDialog" to="." method="_on_file_dialog_canceled"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="canceled" from="AcceptDialog" to="." method="_on_accept_dialog_canceled"]
+[connection signal="confirmed" from="AcceptDialog" to="." method="_on_accept_dialog_confirmed"]

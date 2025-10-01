@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://xrbml7060o4t"]
+
+[ext_resource type="PackedScene" uid="uid://ct2nn7wnoaog3" path="res://scenes/ad.tscn" id="1_h8fkj"]
+[ext_resource type="Script" uid="uid://d24rhsqcvqsfl" path="res://scripts/popup_ad.gd" id="1_ip256"]
+
+[node name="PopupAd" type="Window"]
+position = Vector2i(0, 36)
+size = Vector2i(400, 100)
+unresizable = true
+always_on_top = true
+unfocusable = true
+script = ExtResource("1_ip256")
+
+[node name="Ad" parent="." instance=ExtResource("1_h8fkj")]
+position = Vector2(200, 50)
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]

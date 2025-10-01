@@ -1,0 +1,202 @@
+[gd_scene load_steps=17 format=3 uid="uid://cs0b7ofggljyf"]
+
+[ext_resource type="Script" uid="uid://d1red8sclk0m6" path="res://scripts/ransom.gd" id="1_ddcly"]
+[ext_resource type="Script" uid="uid://b3rmwden662mq" path="res://scripts/browser.gd" id="2_462mt"]
+[ext_resource type="Texture2D" uid="uid://b6rwmlok87b7q" path="res://sprites/loading_bar.png" id="3_a4cds"]
+[ext_resource type="FontFile" uid="uid://dt5b2he26lrbt" path="res://fonts/comicbd.ttf" id="3_a68em"]
+[ext_resource type="FontFile" uid="uid://ewnao6vow1r0" path="res://fonts/comic.ttf" id="3_d5vnf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d5vnf"]
+bg_color = Color(0.244776, 0.244776, 0.244776, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohosv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6hcsl"]
+bg_color = Color(0.489622, 0.489622, 0.489622, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7aka0"]
+bg_color = Color(0.615686, 0.615686, 0.615686, 1)
+
+[sub_resource type="Theme" id="Theme_dnsou"]
+default_font = ExtResource("3_d5vnf")
+default_font_size = 32
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/styles/disabled = SubResource("StyleBoxFlat_d5vnf")
+Button/styles/hover = SubResource("StyleBoxFlat_ohosv")
+Button/styles/normal = SubResource("StyleBoxFlat_6hcsl")
+Button/styles/pressed = SubResource("StyleBoxFlat_7aka0")
+
+[sub_resource type="LabelSettings" id="LabelSettings_d5vnf"]
+font = ExtResource("3_a68em")
+font_size = 192
+
+[sub_resource type="Animation" id="Animation_ujyyl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Loading:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+
+[sub_resource type="Animation" id="Animation_d5vnf"]
+resource_name = "loading"
+length = 2.0
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Loading:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": ["Loading", "Loading.", "Loading..", "Loading..."]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ujyyl"]
+_data = {
+&"RESET": SubResource("Animation_ujyyl"),
+&"loading": SubResource("Animation_d5vnf")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a68em"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d5vnf"]
+texture = ExtResource("3_a4cds")
+
+[node name="Ransom" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ddcly")
+
+[node name="Browser" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_462mt")
+
+[node name="CEF" type="GDCef" parent="Browser"]
+
+[node name="Timer" type="Timer" parent="Browser"]
+one_shot = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Browser"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Browser/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Home" type="Button" parent="Browser/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme = SubResource("Theme_dnsou")
+theme_type_variation = &"FlatButton"
+disabled = true
+text = "Subscribe to veryslowgirl"
+
+[node name="Refresh" type="Button" parent="Browser/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme = SubResource("Theme_dnsou")
+disabled = true
+text = "Refresh"
+
+[node name="Back" type="Button" parent="Browser/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme = SubResource("Theme_dnsou")
+disabled = true
+text = "Previous Page"
+
+[node name="Forward" type="Button" parent="Browser/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme = SubResource("Theme_dnsou")
+disabled = true
+text = "Next Page"
+
+[node name="TextureRect" type="TextureRect" parent="Browser/VBoxContainer"]
+custom_minimum_size = Vector2(1920, 1000)
+layout_mode = 2
+
+[node name="Loading" type="Label" parent="Browser/VBoxContainer/TextureRect"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_d5vnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Browser/VBoxContainer/TextureRect"]
+reset_on_save = false
+libraries = {
+&"": SubResource("AnimationLibrary_ujyyl")
+}
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+title = ""
+initial_position = 2
+size = Vector2i(500, 100)
+unresizable = true
+
+[node name="LoadingWindow" type="Window" parent="."]
+title = "Encrypting file"
+initial_position = 2
+size = Vector2i(512, 64)
+visible = false
+
+[node name="ProgressBar" type="ProgressBar" parent="LoadingWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_a68em")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/background = SubResource("StyleBoxFlat_a68em")
+theme_override_styles/fill = SubResource("StyleBoxTexture_d5vnf")
+
+[connection signal="pressed" from="Browser/VBoxContainer/HBoxContainer/Home" to="Browser" method="_on_home_pressed"]
+[connection signal="pressed" from="Browser/VBoxContainer/HBoxContainer/Refresh" to="Browser" method="_on_refresh_pressed"]
+[connection signal="pressed" from="Browser/VBoxContainer/HBoxContainer/Back" to="Browser" method="_on_back_pressed"]
+[connection signal="pressed" from="Browser/VBoxContainer/HBoxContainer/Forward" to="Browser" method="_on_forward_pressed"]
+[connection signal="gui_input" from="Browser/VBoxContainer/TextureRect" to="Browser" method="_on_texture_rect_gui_input"]
+[connection signal="canceled" from="AcceptDialog" to="." method="_on_popup_closed"]
+[connection signal="confirmed" from="AcceptDialog" to="." method="_on_popup_closed"]

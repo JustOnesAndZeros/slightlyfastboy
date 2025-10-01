@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://6upa8xjpscys"]
+
+[ext_resource type="Script" uid="uid://dpemm54hrcunx" path="res://scripts/wierd_james.gd" id="1_sdr2u"]
+[ext_resource type="Texture2D" uid="uid://ryi2hb1hfb7m" path="res://sprites/wierdjames.png" id="2_588vs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g3iut"]
+size = Vector2(10, 14)
+
+[node name="WeirdJames" type="Area2D"]
+z_index = 1
+collision_mask = 3
+monitorable = false
+script = ExtResource("1_sdr2u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_g3iut")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_588vs")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,253 @@
+[gd_scene load_steps=16 format=3 uid="uid://b4uhcsrqgwutj"]
+
+[ext_resource type="Shader" uid="uid://bcplge1goptgn" path="res://shaders/scroll.gdshader" id="1_vjb58"]
+[ext_resource type="Texture2D" uid="uid://clhj77p17he46" path="res://sprites/slowgirl_background.png" id="2_mhnvy"]
+[ext_resource type="LabelSettings" uid="uid://c2k4g01k8q671" path="res://label settings/title.tres" id="3_mhnvy"]
+[ext_resource type="LabelSettings" uid="uid://cubiegt5ev6li" path="res://label settings/option.tres" id="4_4ytvr"]
+[ext_resource type="Script" uid="uid://brqt2ajfdsv5t" path="res://scripts/menu.gd" id="4_g3eks"]
+[ext_resource type="LabelSettings" uid="uid://bgdx3qp7tilyy" path="res://label settings/menu.tres" id="5_g3eks"]
+[ext_resource type="AudioStream" uid="uid://bbv0aoos7y3mp" path="res://audio/explosion.wav" id="7_13sgg"]
+[ext_resource type="LabelSettings" uid="uid://byw246mncrfvb" path="res://label settings/weird.tres" id="7_v86rl"]
+[ext_resource type="Script" uid="uid://bnmtfnuij2ftc" path="res://scripts/sound.gd" id="9_70i5f"]
+[ext_resource type="AudioStream" uid="uid://gbhgynlub5jl" path="res://audio/explosion_reversed.wav" id="10_mj5lg"]
+[ext_resource type="LabelSettings" uid="uid://bsiie44yqewbi" path="res://label settings/strange.tres" id="11_6cdou"]
+[ext_resource type="AudioStream" uid="uid://dkbl5o4bbscvm" path="res://audio/title.ogg" id="11_mj5lg"]
+[ext_resource type="PackedScene" uid="uid://ct2nn7wnoaog3" path="res://scenes/ad.tscn" id="12_i42df"]
+[ext_resource type="AudioStream" uid="uid://c781q1u4vvjss" path="res://audio/title_reversed.ogg" id="12_ufwb2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_con2f"]
+shader = ExtResource("1_vjb58")
+shader_parameter/scroll_speed = 1.5
+shader_parameter/angle_degrees = 225.0
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_con2f")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_mhnvy")
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 134.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 48
+
+[node name="Title" type="Label" parent="MarginContainer"]
+layout_mode = 2
+text = "slightlyfastboy"
+label_settings = ExtResource("3_mhnvy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 256
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer2"]
+layout_mode = 2
+
+[node name="Menu" type="VBoxContainer" parent="MarginContainer2/CenterContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+script = ExtResource("4_g3eks")
+enabled = true
+
+[node name="Start" type="Label" parent="MarginContainer2/CenterContainer/Menu"]
+layout_mode = 2
+text = "Start Game"
+label_settings = ExtResource("5_g3eks")
+horizontal_alignment = 1
+
+[node name="Options" type="Label" parent="MarginContainer2/CenterContainer/Menu"]
+layout_mode = 2
+text = "Options"
+label_settings = ExtResource("5_g3eks")
+horizontal_alignment = 1
+
+[node name="Weird" type="Label" parent="MarginContainer2/CenterContainer/Menu"]
+layout_mode = 2
+text = "Weird Options"
+label_settings = ExtResource("5_g3eks")
+horizontal_alignment = 1
+
+[node name="Evil" type="Label" parent="MarginContainer2/CenterContainer/Menu"]
+layout_mode = 2
+text = "Evil Options"
+label_settings = ExtResource("5_g3eks")
+horizontal_alignment = 1
+
+[node name="Quit" type="Label" parent="MarginContainer2/CenterContainer/Menu"]
+layout_mode = 2
+text = "Quit"
+label_settings = ExtResource("5_g3eks")
+horizontal_alignment = 1
+
+[node name="Options" type="VBoxContainer" parent="MarginContainer2/CenterContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+script = ExtResource("4_g3eks")
+
+[node name="Back" type="Label" parent="MarginContainer2/CenterContainer/Options"]
+layout_mode = 2
+text = "Back to Main Menu"
+label_settings = ExtResource("4_4ytvr")
+horizontal_alignment = 1
+
+[node name="Fullscreen" type="Label" parent="MarginContainer2/CenterContainer/Options"]
+layout_mode = 2
+text = "Fullscreen: Disabled"
+label_settings = ExtResource("4_4ytvr")
+horizontal_alignment = 1
+
+[node name="Mute" type="Label" parent="MarginContainer2/CenterContainer/Options"]
+layout_mode = 2
+text = "Mute Volume: Disabled"
+label_settings = ExtResource("4_4ytvr")
+horizontal_alignment = 1
+
+[node name="Weird" type="VBoxContainer" parent="MarginContainer2/CenterContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+script = ExtResource("4_g3eks")
+
+[node name="Back" type="Label" parent="MarginContainer2/CenterContainer/Weird"]
+layout_mode = 2
+text = "Back to Main Menu"
+label_settings = ExtResource("7_v86rl")
+horizontal_alignment = 1
+
+[node name="Volume" type="Label" parent="MarginContainer2/CenterContainer/Weird"]
+layout_mode = 2
+text = "Volume: 100%"
+label_settings = ExtResource("7_v86rl")
+horizontal_alignment = 1
+
+[node name="Explosion" type="AudioStreamPlayer" parent="MarginContainer2/CenterContainer/Weird/Volume"]
+stream = ExtResource("7_13sgg")
+script = ExtResource("9_70i5f")
+sfx = ExtResource("7_13sgg")
+sfx_reverse = ExtResource("10_mj5lg")
+
+[node name="Timer" type="Label" parent="MarginContainer2/CenterContainer/Weird"]
+layout_mode = 2
+text = "Speedrun Timer: Disabled"
+label_settings = ExtResource("7_v86rl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Faster" type="Label" parent="MarginContainer2/CenterContainer/Weird"]
+layout_mode = 2
+text = "Faster Mode: Disabled"
+label_settings = ExtResource("7_v86rl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Transgender" type="Label" parent="MarginContainer2/CenterContainer/Weird"]
+layout_mode = 2
+text = "Transgender Mode: Disabled"
+label_settings = ExtResource("7_v86rl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Colour" type="Label" parent="MarginContainer2/CenterContainer/Weird"]
+layout_mode = 2
+text = "Change Background Colour"
+label_settings = ExtResource("7_v86rl")
+horizontal_alignment = 1
+
+[node name="Color" type="Label" parent="MarginContainer2/CenterContainer/Weird"]
+layout_mode = 2
+text = "Change Colour"
+label_settings = ExtResource("7_v86rl")
+horizontal_alignment = 1
+
+[node name="Evil" type="VBoxContainer" parent="MarginContainer2/CenterContainer"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("4_g3eks")
+
+[node name="Back" type="Label" parent="MarginContainer2/CenterContainer/Evil"]
+layout_mode = 2
+text = "Back to Main Menu"
+label_settings = ExtResource("11_6cdou")
+horizontal_alignment = 1
+
+[node name="Murder" type="Label" parent="MarginContainer2/CenterContainer/Evil"]
+layout_mode = 2
+text = "Murder Counter: Disabled"
+label_settings = ExtResource("11_6cdou")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Explosion" type="Label" parent="MarginContainer2/CenterContainer/Evil"]
+layout_mode = 2
+text = "Explosion Damage: Disabled"
+label_settings = ExtResource("11_6cdou")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bullet" type="Label" parent="MarginContainer2/CenterContainer/Evil"]
+layout_mode = 2
+text = "Bullet Hell Mode: Disabled"
+label_settings = ExtResource("11_6cdou")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ads" type="Label" parent="MarginContainer2/CenterContainer/Evil"]
+layout_mode = 2
+text = "Premium: Enabled"
+label_settings = ExtResource("11_6cdou")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ransomware" type="Label" parent="MarginContainer2/CenterContainer/Evil"]
+layout_mode = 2
+text = "Ransomware Mode: Disabled"
+label_settings = ExtResource("11_6cdou")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ads" type="Node2D" parent="."]
+visible = false
+
+[node name="Ad" parent="Ads" instance=ExtResource("12_i42df")]
+position = Vector2(256, 680)
+rotation = -1.5708
+scale = Vector2(1.8, 1.8)
+cycle = true
+
+[node name="Ad2" parent="Ads" instance=ExtResource("12_i42df")]
+position = Vector2(1664, 680)
+rotation = 1.5708
+scale = Vector2(1.8, 1.8)
+cycle = true
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_mj5lg")
+autoplay = true
+script = ExtResource("9_70i5f")
+sfx = ExtResource("11_mj5lg")
+sfx_reverse = ExtResource("12_ufwb2")

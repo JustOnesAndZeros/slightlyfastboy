@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://c1ytyjf8smbsc"]
+
+[ext_resource type="Script" uid="uid://b45acl01p3svx" path="res://scripts/strange_john.gd" id="1_kcoy5"]
+[ext_resource type="Texture2D" uid="uid://blsn1oseqcqye" path="res://sprites/strangejohn.png" id="2_hjla1"]
+[ext_resource type="Texture2D" uid="uid://b1tewusmscrvy" path="res://sprites/eyebrows.png" id="3_170ac"]
+[ext_resource type="AudioStream" uid="uid://dbu8okwghglsh" path="res://audio/ambience.ogg" id="4_hjla1"]
+[ext_resource type="Script" uid="uid://k6cruxegn7ug" path="res://scripts/sound_2d.gd" id="5_170ac"]
+[ext_resource type="AudioStream" uid="uid://i5j3kvluuai0" path="res://audio/ambience_reversed.ogg" id="6_patdp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ukg82"]
+size = Vector2(10, 14)
+
+[node name="StrangeJohn" type="Area2D"]
+collision_mask = 3
+monitorable = false
+script = ExtResource("1_kcoy5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_ukg82")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_hjla1")
+
+[node name="Eyes" type="Sprite2D" parent="Sprite2D"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("3_170ac")
+
+[node name="FleeTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="FollowTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0.5, 1.04308e-07)
+scale = Vector2(0.75, 0.9)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_hjla1")
+pitch_scale = 0.5
+script = ExtResource("5_170ac")
+sfx = ExtResource("4_hjla1")
+sfx_reverse = ExtResource("6_patdp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="FleeTimer" to="." method="_on_flee_timer_timeout"]
+[connection signal="timeout" from="FollowTimer" to="." method="_on_follow_timer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]

@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2qdx82knwogi"]
+
+[ext_resource type="Script" uid="uid://bdgslprxur2c4" path="res://scripts/fast_boy.gd" id="1_kdum3"]
+[ext_resource type="Texture2D" uid="uid://b17i7xorwip0d" path="res://sprites/fastboy.png" id="2_2pn0i"]
+[ext_resource type="Script" uid="uid://dh8oipe4bvjki" path="res://scripts/camera_shake.gd" id="3_5rdum"]
+[ext_resource type="Script" uid="uid://d1f1r3g4wati0" path="res://scripts/james_hat.gd" id="4_3vesq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5kiuu"]
+size = Vector2(6, 16)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5rdum"]
+frequency = 0.05
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w1b4n"]
+seamless = true
+noise = SubResource("FastNoiseLite_5rdum")
+
+[node name="FastBoy" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_kdum3")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5kiuu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2pn0i")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+z_index = 2
+zoom = Vector2(8, 8)
+script = ExtResource("3_5rdum")
+noise = SubResource("NoiseTexture2D_w1b4n")
+
+[node name="JamesHat" type="Node2D" parent="."]
+position = Vector2(0, -8)
+script = ExtResource("4_3vesq")
+
+[node name="HitBox" type="ColorRect" parent="."]
+visible = false
+offset_left = -0.5
+offset_top = -0.5
+offset_right = 0.5
+offset_bottom = 0.5
+color = Color(1, 1, 0, 1)

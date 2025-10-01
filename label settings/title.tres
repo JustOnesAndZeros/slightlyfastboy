@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://c2k4g01k8q671"]
+
+[ext_resource type="FontFile" uid="uid://dt5b2he26lrbt" path="res://fonts/comicbd.ttf" id="1_n2gai"]
+
+[resource]
+font = ExtResource("1_n2gai")
+font_size = 160
+font_color = Color(0.356863, 0.807843, 0.980392, 1)
+outline_size = 48
+outline_color = Color(0, 0, 0, 1)
